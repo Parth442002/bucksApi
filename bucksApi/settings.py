@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 
     # Local Apps
     'authentication',
-    # 'bankDetails',
+    'bankDetails',
     # 'shops',
 ]
 
