@@ -54,8 +54,8 @@ INSTALLED_APPS = [
 
     # Local Apps
     'authentication',
-    #'bankDetails',
-    #'shops',
+    # 'bankDetails',
+    # 'shops',
 ]
 
 SITE_ID = 1
@@ -72,7 +72,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 'geoApi.urls'
+ROOT_URLCONF = 'bucksApi.urls'
 
 TEMPLATES = [
     {
@@ -90,7 +90,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'geoApi.wsgi.application'
+WSGI_APPLICATION = 'bucksApi.wsgi.application'
 
 
 # Database
