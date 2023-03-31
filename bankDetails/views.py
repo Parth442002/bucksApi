@@ -55,10 +55,26 @@ class CreateBankDetails(APIView):
 
 
 class BuyCardView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
     def post(self, request):
         serializer = CardDetailsSerializer(data=request.data)
         if serializer.is_valid():
             # Specific Functions that should take place
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateCardView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def patch(self, request, card_id):
+        card = get_object_or_404(BankCards, id=card_id)
+        serializer = CardDetailsSerializer(
+            card, data=request.data, partial=True)
+        if serializer.is_valid():
+            # The data which is passed is accurate
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

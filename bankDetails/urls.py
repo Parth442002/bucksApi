@@ -7,4 +7,5 @@ urlpatterns = [
     path("", views.RetriveBankDetails.as_view()),
     path("create/", views.CreateBankDetails.as_view()),
     path("cards/buy/", views.BuyCardView.as_view()),
+    path("cards/update/<uuid:card_id>/", views.UpdateCardView.as_view()),
 ]

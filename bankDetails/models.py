@@ -22,6 +22,7 @@ class BankDetail(models.Model):
         default=BANK_TYPE[1][0],
         max_length=100,
     )
+    reward_points = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.account.primary_identifier + "- Bank Details"
