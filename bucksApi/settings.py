@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     # Local Apps
     'authentication',
     'bankDetails',
-    # 'shops',
+    'partners',
 ]
 
 SITE_ID = 1
