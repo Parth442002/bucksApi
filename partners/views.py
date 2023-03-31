@@ -40,7 +40,7 @@ class UserNearbyPartnersView(APIView):
 
         # Filter the Places within the radius of the user's location
         queryset = Partner.objects.annotate(distance=Distance(
-            'location', user_location)).filter(distance__lte=radius)
+            'location', user_location)).filter(distance__lte=radius).order_by("distance")
 
         # Serialize the queryset using the PartnerSerializer
         serializer = BankPartnerDetailsSerializer(queryset, many=True)

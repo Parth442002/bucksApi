@@ -46,3 +46,44 @@ class Partner(models.Model):
 
     def __str__(self) -> str:
         return self.name+" "+self.partner_type
+
+
+# Offer Model
+class Offer(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False)
+    statement = models.CharField(max_length=200)
+    desc = models.TextField(max_length=400)
+
+    # Time Related
+    start = models.DateField(blank=True, null=True)
+    end = models.DateField(blank=True, null=True)
+
+    # Financial Aspect
+    discount = models.IntegerField(blank=True, null=True)
+    is_cashback = models.BooleanField(default=False)
+    cashback_amt = models.BigIntegerField(blank=True, null=True)
+
+    # To Check Validity
+    meta_data = models.JSONField(default=dict({
+        "partners": [],
+        "bank_types": []
+    }))
+
+    def checkUser_valid(self, user_id):
+        '''
+        Check if the BankDetails's type is in the list given in the meta_data partners or not
+        '''
+        # Retrieve the user's bank details
+        try:
+            user_bank_details = Partner.objects.get(account=user_id)
+        except Partner.DoesNotExist:
+            return False
+
+        # Check if the user's bank type is in the list of valid bank types for the coupon
+        if user_bank_details.partner_type in self.meta_data.get('bank_types', []):
+            return True
+        else:
+            return False
