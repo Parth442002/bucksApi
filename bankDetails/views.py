@@ -78,3 +78,33 @@ class UpdateCardView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class receiveRewardsView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, bank_id, amount):
+        bank = get_object_or_404(BankDetail, id=bank_id)
+        if amount > 0:
+            total = bank.reward_points+amount
+            serializer = BankDetailSerializer(
+                bank, data={"reward_points": total}, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class SpendRewardsView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, bank_id, amount):
+        bank = get_object_or_404(BankDetail, id=bank_id)
+        if amount <= bank.reward_points:
+            total = bank.reward_points-amount
+            serializer = BankDetailSerializer(
+                bank, data={"reward_points": total}, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
