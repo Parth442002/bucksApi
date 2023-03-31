@@ -23,4 +23,5 @@ urlpatterns = [
     # Local Apps EndPoints
     path("api/auth/", include("authentication.urls")),
     path("api/bank/", include("bankDetails.urls")),
+    path("api/partners/", include("partners.urls")),
 ]
