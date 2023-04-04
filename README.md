@@ -34,4 +34,4 @@ python manage.py runserver
 ```
 
 ### Api Endpoints
-![](../bucksApi/apiEndpoints.png)
+![](./apiEndpoints.png)
