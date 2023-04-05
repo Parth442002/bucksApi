@@ -1,7 +1,7 @@
 # Neo Bank Digital Experience App Backend
 
 
-### Introduction
+### Introduction uwu
 
 
 This project is the backend for the Neo Bank Digital Experience App. The backend is developed using Django and Django REST Framework and utilizes a PostgreSQL database with the PostGIS extension for location-based features.
